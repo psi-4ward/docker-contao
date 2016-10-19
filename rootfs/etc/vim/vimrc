@@ -1,0 +1,24 @@
+set nocompatible          " Use Vim defaults (much better!)
+set bs=indent,eol,start   " allow backspacing over everything in insert mode
+
+filetype plugin on
+
+" Tabs
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set expandtab
+
+" Search
+set smartcase
+set ignorecase
+
+" Appearance
+set laststatus=2
+colorscheme darcula
+syntax on
+
+" jump to the last position when reopening a file
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# execute pre tasks
+if [ -e /etc/services.pre ]; then
+  for i in $(find /etc/services.pre -type f -executable); do
+    $i || exit $?
+  done
+fi
+
+exec s6-svscan -t 0 /etc/services.d
+
+# execute post tasks
+if [ -e /etc/services.post ]; then
+  for i in $(find /etc/services.post -type f -executable | sort); do
+    $i
+  done
+fi

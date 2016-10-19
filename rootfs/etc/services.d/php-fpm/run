@@ -1,0 +1,21 @@
+#!/bin/bash
+
+if [ "$TIMEZONE" != "" ] && [ -e /etc/php.ini ] ; then
+  # we use ~ as rgxp delimiter to not collide with TIMEZONEs /
+  sed -r -i "s~^;?date\.timezone =.*~date.timezone = \"${TIMEZONE}\"~g" /etc/php.ini
+fi
+
+# We run php-fpm with apache user
+chgrp apache /var/lib/php/* -R
+
+# Enable xdebug
+if [ "$XDEBUG" != "" ] &&  [ "$XDEBUG" != "false" ]; then
+  echo Enabling xdebug
+  sed -r -i "s~^;?zend_extension=xdebug\.so~zend_extension=xdebug.so~g" /etc/php.d/15-xdebug.ini
+fi
+
+if [ -x /etc/services.d/php-fpm/setup ]; then
+  /etc/services.d/php-fpm/setup || exit $?
+fi
+
+exec /usr/sbin/php-fpm -F
