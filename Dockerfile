@@ -31,6 +31,7 @@ RUN yum install epel-release -y \
       php70u-mcryp \
       php70u-mysqlnd \
       php70u-snmp \
+      php70u-soap \
       php70u-xml \
       php70u-pecl-xdebug \
   && wget https://getcomposer.org/download/1.2.1/composer.phar -O /usr/bin/composer \
@@ -41,5 +42,9 @@ RUN yum install epel-release -y \
 
 ADD rootfs /
 RUN chown apache /usr/share/httpd
+
+EXPOSE 80
+VOLUME ["/var/www"]
+WORKDIR /var/www
 
 CMD ["/init"]
