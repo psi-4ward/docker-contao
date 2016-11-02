@@ -46,5 +46,6 @@ RUN chown apache /usr/share/httpd
 EXPOSE 80
 VOLUME ["/var/www"]
 WORKDIR /var/www
+HEALTHCHECK CMD curl -f http://localhost/ || exit 1
 
 CMD ["/init"]
