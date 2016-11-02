@@ -3,7 +3,9 @@ MAINTAINER Christoph Wiechert <wio@psitrax.de>
 ENV REFRESHED_AT="2016-10-31"
 ENV TIMEZONE="Europe/Berlin" \
     RUN_ID="" \
-    XDEBUG="false"
+    XDEBUG="false" \
+    PHP_VALUE="" \
+    PHP_ADMIN_VALUE=""
 
 RUN yum install epel-release -y \
   && yum -y install https://centos7.iuscommunity.org/ius-release.rpm \

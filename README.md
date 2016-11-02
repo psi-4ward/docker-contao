@@ -26,6 +26,7 @@ sudo docker run --rm --name contao \
   -p 80:80 \
   -e RUN_UID=$UID \
   -e XDEBUG=true \
+  -e PHP_VALUE=max_execution_time=90,memory_limit=512M \
   psitrax/contao
 
 // enter the Container
@@ -43,6 +44,7 @@ Use Environment Variables for Configuration
 * `TIMEZONE=America/New_York` Adjust the timezone (Default: Europe/Berlin)
 * `RUN_ID` The UID of internal `apache` User. Set it to your local UID to prevent file access problmes while developing.
 * `XDEBUG=true` Enable xdebug (disabled by default)
+* `PHP_VALUE` / `PHP_ADMIN_VALUE` Overwrite arbirtrary PHP settings: eg `max_execution_time=90,memory_limit=512M`
 
 
 ## Maintainer
