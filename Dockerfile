@@ -1,6 +1,6 @@
 FROM centos:7
 MAINTAINER Christoph Wiechert <wio@psitrax.de>
-ENV REFRESHED_AT="2016-10-19"
+ENV REFRESHED_AT="2016-10-31"
 ENV TIMEZONE="Europe/Berlin" \
     RUN_ID="" \
     XDEBUG="false"
@@ -25,6 +25,7 @@ RUN yum install epel-release -y \
       php70u-fpm \
       php70u-fpm-httpd \
       php70u-gd \
+      php70u-pecl-imagick \
       php70u-intl \
       php70u-json \
       php70u-mbstring \

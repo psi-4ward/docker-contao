@@ -7,7 +7,8 @@
 * Auto-adjust `DocumentRoot` for Contao 4
 * Configured for [Contao CMS](https://www.contao.org)
 * Init system based on [S6](http://skarnet.org/software/s6/)
-* Includes some useful tools and presets like curl, bashrc and vimrc
+* Includes some useful tools and presets like git, curl, bashrc and vimrc
+* Xdebug (disabled by default), Imagemagick, php-(bcmath,intl,json,mbstring,mcrypt,mysql,snmp,soap,xml)
 
 ## Usage
 
