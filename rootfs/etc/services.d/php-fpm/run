@@ -6,7 +6,12 @@ if [ "$TIMEZONE" != "" ] && [ -e /etc/php.ini ] ; then
 fi
 
 # We run php-fpm with apache user
-chgrp apache /var/lib/php/* -R
+# recreate directory to workaround wired permission bug
+rm -rf /var/lib/php
+mkdir -p /var/lib/php/fpm/wsdlcache
+mkdir -p /var/lib/php/fpm/opcache
+mkdir -p /var/lib/php/fpm/session
+chown -R apache:apache /var/lib/php
 
 # Enable xdebug
 if [ "$XDEBUG" != "" ] &&  [ "$XDEBUG" != "false" ]; then
