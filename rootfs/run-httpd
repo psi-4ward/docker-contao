@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Adjust DocumentRoot for Contao 4
+if [ -f /var/www/composer.json ] && `grep -E -q 'contao/contao.*\^4\.' /var/www/composer.json`; then
+  echo Contao 4 detected. Change DocumentRoot to /var/www/web
+  sed  -i 's~^DocumentRoot .*~DocumentRoot "/var/www/web"~' /etc/httpd/conf/httpd.conf
+fi
+
+exec /usr/sbin/httpd -D FOREGROUND

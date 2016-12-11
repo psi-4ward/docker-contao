@@ -1,6 +1,0 @@
-#!/bin/sh
-
-if [ "$RUN_UID" != "" ] ; then
-  echo Set apache UID to $RUN_UID
-  usermod -u $RUN_UID apache
-fi
