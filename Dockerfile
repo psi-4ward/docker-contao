@@ -1,6 +1,6 @@
 FROM centos:7
 MAINTAINER Christoph Wiechert <wio@psitrax.de>
-ENV REFRESHED_AT="2016-10-31"
+ENV REFRESHED_AT="2017-12-05"
 ENV TIMEZONE="Europe/Berlin" \
     RUN_ID="" \
     XDEBUG="false" \
@@ -22,21 +22,21 @@ RUN yum install epel-release -y \
       ca-certificates \
       bzip2 \
       httpd \
-      php70u-bcmath \
-      php70u-cli \
-      php70u-fpm \
-      php70u-fpm-httpd \
-      php70u-gd \
-      php70u-pecl-imagick \
-      php70u-intl \
-      php70u-json \
-      php70u-mbstring \
-      php70u-mcryp \
-      php70u-mysqlnd \
-      php70u-snmp \
-      php70u-soap \
-      php70u-xml \
-      php70u-pecl-xdebug \
+      php71u-bcmath \
+      php71u-cli \
+      php71u-fpm \
+      php71u-fpm-httpd \
+      php71u-gd \
+      php71u-pecl-imagick \
+      php71u-intl \
+      php71u-json \
+      php71u-mbstring \
+      php71u-mcryp \
+      php71u-mysqlnd \
+      php71u-snmp \
+      php71u-soap \
+      php71u-xml \
+      php71u-pecl-xdebug \
   && wget https://getcomposer.org/download/1.2.1/composer.phar -O /usr/bin/composer \
   && chmod +x /usr/bin/composer \
   && rm -rf /var/www/* \

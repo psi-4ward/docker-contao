@@ -33,6 +33,10 @@ sudo docker run --rm --name contao \
 sudo docker exec -ti contao bash
 root at 53e71dbf4adc in ~ su apache
 root at 53e71dbf4adc in /var/www ~ composer create-project contao/standard-edition website
+
+// or managed edition
+root at 53e71dbf4adc in /var/www ~ composer create-project contao/managed-edition website
+
 root at 53e71dbf4adc in /var/www ~ mv website/* website/.gitignore .
 // Restart Container to detect Contao 4
 ```
@@ -44,7 +48,7 @@ Use Environment Variables for Configuration
 * `TIMEZONE=America/New_York` Adjust the timezone (Default: Europe/Berlin)
 * `RUN_ID` The UID of internal `apache` User. Set it to your local UID to prevent file access problmes while developing.
 * `XDEBUG=true` Enable xdebug (disabled by default)
-* `PHP_VALUE` / `PHP_ADMIN_VALUE` Overwrite arbirtrary PHP settings: eg `max_execution_time=90,memory_limit=512M`
+* `PHP_VALUE` / `PHP_ADMIN_VALUE` Overwrite arbitrary PHP settings: eg `max_execution_time=90,memory_limit=512M`
 
 
 ## Maintainer
