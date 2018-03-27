@@ -1,6 +1,10 @@
 FROM centos:7
 MAINTAINER Christoph Wiechert <wio@psitrax.de>
+<<<<<<< HEAD
 ENV REFRESHED_AT="2018-03-27"
+=======
+ENV REFRESHED_AT="2017-12-05"
+>>>>>>> 1b478d62c4b2dd5cccb54e5e6eec27ae3f07db71
 ENV TIMEZONE="Europe/Berlin" \
     RUN_ID="" \
     XDEBUG="false" \
