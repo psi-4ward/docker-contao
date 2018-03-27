@@ -1,10 +1,6 @@
 FROM centos:7
 MAINTAINER Christoph Wiechert <wio@psitrax.de>
-<<<<<<< HEAD
 ENV REFRESHED_AT="2018-03-27"
-=======
-ENV REFRESHED_AT="2017-12-05"
->>>>>>> 1b478d62c4b2dd5cccb54e5e6eec27ae3f07db71
 ENV TIMEZONE="Europe/Berlin" \
     RUN_ID="" \
     XDEBUG="false" \
@@ -41,7 +37,7 @@ RUN yum install epel-release -y \
       php72u-soap \
       php72u-xml \
       php72u-pecl-xdebug \
-  && wget https://getcomposer.org/download/1.2.1/composer.phar -O /usr/bin/composer \
+  && wget https://getcomposer.org/download/1.6.3/composer.phar -O /usr/bin/composer \
   && chmod +x /usr/bin/composer \
   && rm -rf /var/www/* \
   && chsh -s /bin/bash apache \

@@ -2,7 +2,7 @@
 
 * Based on CentOS 7
 * Apache 2.4 (event)
-* PHP 7.0
+* PHP 7.2
 * Preinstalled composer
 * Auto-adjust `DocumentRoot` for Contao 4
 * Configured for [Contao CMS](https://www.contao.org)
