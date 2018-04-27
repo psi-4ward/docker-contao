@@ -37,7 +37,7 @@ RUN yum install epel-release -y \
       php72u-soap \
       php72u-xml \
       php72u-pecl-xdebug \
-  && wget https://getcomposer.org/download/1.6.3/composer.phar -O /usr/bin/composer \
+  && wget https://getcomposer.org/download/1.6.4/composer.phar -O /usr/bin/composer \
   && chmod +x /usr/bin/composer \
   && rm -rf /var/www/* \
   && chsh -s /bin/bash apache \
