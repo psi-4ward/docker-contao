@@ -18,6 +18,8 @@ alias la='ls -lah --color=auto'
 alias l='ls -lh --color=auto'
 alias grep='grep --color'
 
+alias composer="COMPOSER_MEMORY_LIMIT=-1 composer"
+
 #h backup: make a copy and append current datetime
 backup() {
   for file in $@ ; do

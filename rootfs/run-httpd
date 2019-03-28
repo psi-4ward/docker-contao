@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# kill old pidfile
+rm /var/run/httpd/httpd.pid
+
 # Adjust DocumentRoot for Contao 4
 if [ -f /var/www/composer.json ] && `grep -E -q 'contao/contao.*\^4\.' /var/www/composer.json`; then
   echo Contao 4 detected. Change DocumentRoot to /var/www/web

@@ -6,8 +6,7 @@
 * Preinstalled composer
 * Auto-adjust `DocumentRoot` for Contao 4
 * Configured for [Contao CMS](https://www.contao.org)
-* Ability to change UID of Apache
-* Init system based on [S6](http://skarnet.org/software/s6/)
+* Ability to change UID of Apache to circumvent permission problems
 * Includes some useful tools and presets like git, curl, bashrc and vimrc
 * Xdebug (disabled by default), Imagemagick, php-(bcmath,intl,json,mbstring,mcrypt,mysql,snmp,soap,xml)
 
