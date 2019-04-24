@@ -22,6 +22,7 @@ RUN yum install epel-release yum-utils -y \
       openssl \
       ca-certificates \
       bzip2 \
+      unzip \
       httpd \
       mod_php \
       php-bcmath \
@@ -37,6 +38,7 @@ RUN yum install epel-release yum-utils -y \
       php-snmp \
       php-soap \
       php-xml \
+      php-pecl-zip \
       php-pecl-xdebug \
   && curl -sSL https://getcomposer.org/download/1.8.5/composer.phar -o /usr/local/bin/composer-bin \
   && chmod +x /usr/local/bin/composer-bin \
