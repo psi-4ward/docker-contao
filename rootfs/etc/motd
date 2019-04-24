@@ -7,7 +7,7 @@
 See https://github.com/psi-4ward/docker-contao
 
 Your DocumentRoot is /var/www
-Use apache user to run composer to prevent file permission problems.
+Use apache user to run php commands to prevent file permission problems.
 Become apache with command: su apache
 
 Happy hacking :)

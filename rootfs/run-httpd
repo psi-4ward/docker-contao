@@ -1,7 +1,11 @@
 #!/bin/sh
 
-# kill old pidfile
+# Kill old pidfile, apache is grumpy here
 [ -e /var/run/httpd/httpd.pid ] && rm /var/run/httpd/httpd.pid
+
+# Fix permissions cause apache could have another UID
+chown -R apache /usr/share/httpd
+chown -R apache /run/httpd
 
 # Adjust DocumentRoot for Contao 4
 if [ -f /var/www/composer.json ] && `grep -E -q 'contao/(contao|manager).*"?4\.' /var/www/composer.json`; then

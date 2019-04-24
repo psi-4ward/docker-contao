@@ -1,24 +1,26 @@
 #!/bin/bash
 set -e
 
-if [ "$RUN_UID" != "" ] ; then
+# Adjust UserID for apache to match permission from volume mount
+if [ -n "$RUN_UID" ] ; then
   echo Set apache UID to $RUN_UID
-  usermod -u $RUN_UID apache
+  [[ $(id -u apache) != "$RUN_UID" ]] && usermod -u $RUN_UID apache
 fi
 
-
-if [ "$TIMEZONE" != "" ]; then
+# Adjust timezone
+if [ -n "$TIMEZONE" ]; then
   echo Set TIMEZONE to $TIMEZONE
   if [ ! -e /usr/share/zoneinfo/$TIMEZONE ]; then
     >&2 echo ERROR: Could not set timezone. File /usr/share/zoneinfo/$TIMEZONE does not exist.
     exit 1
   fi
-  rm /etc/localtime
-  ln -s /usr/share/zoneinfo/$TIMEZONE /etc/localtime
+  ln -sf /usr/share/zoneinfo/$TIMEZONE /etc/localtime
 else
-  echo Hint: set your timezone using TIMEZONE env var.
+  echo Hint: Set your timezone using TIMEZONE env var.
 fi
 
-/run-php-fpm
+# PHP configuration
+/conf-php
 
+# Start Apache
 exec /run-httpd

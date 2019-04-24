@@ -1,19 +1,11 @@
 #!/bin/bash
 
-# kill old FPM
-pkill -TERM php-form || true
-
 if [ "$TIMEZONE" != "" ] && [ -e /etc/php.ini ] ; then
   # we use ~ as rgxp delimiter to not collide with TIMEZONEs /
   sed -r -i "s~^;?date\.timezone =.*~date.timezone = \"${TIMEZONE}\"~g" /etc/php.ini
 fi
 
-# We run php-fpm with apache user
-# recreate directory to workaround wired permission bug
-rm -rf /var/lib/php
-mkdir -p /var/lib/php/fpm/wsdlcache
-mkdir -p /var/lib/php/fpm/opcache
-mkdir -p /var/lib/php/fpm/session
+# Fix permissions cause apache could have another UID
 chown -R apache:apache /var/lib/php
 
 # Enable xdebug
@@ -22,7 +14,8 @@ if [ "$XDEBUG" != "" ] &&  [ "$XDEBUG" != "false" ]; then
   sed -r -i "s~^;?zend_extension=xdebug\.so~zend_extension=xdebug.so~g" /etc/php.d/15-xdebug.ini
 fi
 
-# Parse $PHP_VALUE / $PHP_ADMIN_VALUE settings
+# Parse $PHP_VALUE, $PHP_ADMIN_VALUE, $PHP_FLAG, $PHP_ADMIN_FLAG env vars
+[[ -e /etc/httpd/conf.d/50-php-config.conf ]] && rm /etc/httpd/conf.d/50-php-config.conf
 parsePhpValue() {
   local k
   local v
@@ -30,11 +23,10 @@ parsePhpValue() {
   for t in ${!1//,/ } ; do
     k=$(echo $t | cut -d = -f 1)
     v=$(echo $t | cut -d = -f 2)
-    echo "${1,,}[$k] = $v" >> /etc/php-fpm.d/www.conf
+    echo "${1,,} $k $v" >> /etc/httpd/conf.d/50-php-config.conf
   done
 }
 parsePhpValue PHP_VALUE
 parsePhpValue PHP_ADMIN_VALUE
-
-
-exec /usr/sbin/php-fpm -D
+parsePhpValue PHP_FLAG
+parsePhpValue PHP_ADMIN_FLAG

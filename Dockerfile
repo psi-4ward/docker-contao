@@ -1,14 +1,15 @@
 FROM centos:7
 MAINTAINER Christoph Wiechert <wio@psitrax.de>
-ENV REFRESHED_AT="2019-03-28"
+ENV REFRESHED_AT="2019-04-24"
 ENV TIMEZONE="Europe/Berlin" \
-    RUN_ID="" \
+    RUN_UID="" \
     XDEBUG="false" \
     PHP_VALUE="" \
     PHP_ADMIN_VALUE=""
 
-RUN yum install epel-release -y \
-  && yum -y install https://centos7.iuscommunity.org/ius-release.rpm \
+RUN yum install epel-release yum-utils -y \
+  && yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm \
+  && yum-config-manager --enable remi-php73 \
   && yum upgrade -y \
   && yum install -y \
       git \
@@ -22,34 +23,32 @@ RUN yum install epel-release -y \
       ca-certificates \
       bzip2 \
       httpd \
-      php72u-bcmath \
-      php72u-cli \
-      php72u-fpm \
-      php72u-fpm-httpd \
-      php72u-gd \
-      php72u-pecl-imagick \
-      php72u-intl \
-      php72u-json \
-      php72u-mbstring \
-      php72u-mcryp \
-      php72u-mysqlnd \
-      php72u-snmp \
-      php72u-soap \
-      php72u-xml \
-      php72u-pecl-xdebug \
-  && wget https://getcomposer.org/download/1.8.4/composer.phar -O /usr/bin/composer \
-  && chmod +x /usr/bin/composer \
+      mod_php \
+      php-bcmath \
+      php-cli \
+      php-gd \
+      php-pecl-imagick \
+      php-intl \
+      php-json \
+      php-mbstring \
+      php-mcryp \
+      php-mysqlnd \
+      php-opcache \
+      php-snmp \
+      php-soap \
+      php-xml \
+      php-pecl-xdebug \
+  && curl -sSL https://getcomposer.org/download/1.8.5/composer.phar -o /usr/local/bin/composer-bin \
+  && chmod +x /usr/local/bin/composer-bin \
   && rm -rf /var/www/* \
   && chsh -s /bin/bash apache \
-  && yum clean all
+  && yum clean all \
+  && localedef -i en_US -f UTF-8 en_US.UTF-8
 
 ADD rootfs /
-RUN chown apache /usr/share/httpd
 
 EXPOSE 80
 VOLUME ["/var/www"]
 WORKDIR /var/www
-HEALTHCHECK CMD curl -f http://localhost/ || exit 1
 
 CMD ["/init"]
-
