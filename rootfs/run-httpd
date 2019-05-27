@@ -5,7 +5,9 @@
 
 # Fix permissions cause apache could have another UID
 chown -R apache /usr/share/httpd
-chown -R apache /run/httpd
+mkdir -p /run/httpd
+chown -R apache:root /run/httpd
+chmod 775 /run/httpd
 
 # Adjust DocumentRoot for Contao 4
 if [ -f /var/www/composer.json ] && `grep -E -q 'contao/(contao|manager).*"?4\.' /var/www/composer.json`; then
